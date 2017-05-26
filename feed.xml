@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<atom:link href="https://ollieparanoid.github.io/feed.xml" rel="self" type="application/rss+xml" />
+<title>ollieparanoid</title>
+<description>ollieparanoid</description>
+<link>https://ollieparanoid.github.io/</link>
+<item>
+<title>
+postmarketOS: Aiming for a 10 year life-cycle for smartphones
+</title>
+<link>/post/postmarketOS/</link>
+<guid>/post/postmarketOS/</guid>
+</item>
+</channel>
+</rss>

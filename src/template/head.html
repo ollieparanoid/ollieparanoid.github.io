@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<style type="text/css">
+/* general */
+body {
+	margin: 0px;
+	padding: 10px 50px;
+	font-family: DejaVu Sans, Sans-Serif, Arial;
+}
+a, a:visited, body {
+	color: #444;
+}
+a:hover, a:active {
+	color: green;
+}
+
+.header, .post {
+	max-width: 800px;
+}
+
+/* header */
+.header {
+	display: block;
+	line-height: 20pt;
+	margin-left: auto;
+	margin-right: auto;
+}
+/* header logo: icon + green text on the right */
+.logo, .logo:visited {
+	display: block;
+	color: green;
+}
+.icon {
+	animation: rotate 2s linear infinite;
+	animation-play-state: paused;
+	display: block;
+	font-size: 50pt;
+	float: left;
+	line-height: 50pt;
+	padding: 0px 10px;
+}
+.logo:hover .icon {
+	animation-play-state: running;
+}
+@keyframes rotate {
+	100% {transform: rotate(1turn);}
+}
+.logotext {
+	display: inline-block;
+	padding: 0px 15px;
+	font-style: italic;
+	line-height: 25pt;
+}
+.header .links {
+	background: lightgray;
+	display: block;
+	margin-top: 10px;
+	line-height: 25pt;
+	border-bottom: 1px solid green;
+	box-shadow: 0px 2px 1px 0px green;
+}
+.header .links a {
+	padding: 10px;
+	text-decoration: none;
+}
+/* content */
+.post {
+	display: block;
+	margin: 50px;
+	padding-bottom: 25px;
+	border-bottom: 2px solid lightgray;
+	margin-left: auto;
+	margin-right: auto;
+	line-height: 2;
+}
+
+.h1 {
+	display: block;
+	text-decoration: underline;
+	font-weight: bold;
+	margin: 50px 0px 50px 0px;
+	transform: scale(1, 1.5);
+	line-height: 40pt;
+	font-size: 30pt;
+}
+
+.h2 {
+	display: block;
+	font-size: 18pt;
+	font-weight: bold;
+}
+
+.index {
+	font-size: 9pt;
+}
+
+.date, .ert, .ert::before {
+	color: gray;
+	text-weight: bold;
+	font-size: 10.5pt;
+}
+
+.date::after {
+	content: "/";
+	padding: 0px 0px 0px 5px;
+}
+
+.mono, code {
+	font-family: Consolas,Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+}
+
+.index_post {
+	display: block;
+}
+
+/* thumbnails */
+.thumb {
+	border-bottom: 3px dotted #444;
+	font-size: 0;
+}
+.thumb:hover {
+	border-bottom: 3px dotted green;
+}
+.thumb img {
+	width: 100px;
+	height: 100px;
+	padding-bottom: 3px;
+	margin-top: 20px;"
+}
+
+</style>
+<link rel="alternate" href="@WEBROOT@/feed.xml" type="application/rss+xml">

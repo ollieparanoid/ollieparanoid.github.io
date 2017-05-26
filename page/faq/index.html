@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<style type="text/css">
+/* general */
+body {
+	margin: 0px;
+	padding: 10px 50px;
+	font-family: DejaVu Sans, Sans-Serif, Arial;
+}
+a, a:visited, body {
+	color: #444;
+}
+a:hover, a:active {
+	color: green;
+}
+
+.header, .post {
+	max-width: 800px;
+}
+
+/* header */
+.header {
+	display: block;
+	line-height: 20pt;
+	margin-left: auto;
+	margin-right: auto;
+}
+/* header logo: icon + green text on the right */
+.logo, .logo:visited {
+	display: block;
+	color: green;
+}
+.icon {
+	animation: rotate 2s linear infinite;
+	animation-play-state: paused;
+	display: block;
+	font-size: 50pt;
+	float: left;
+	line-height: 50pt;
+	padding: 0px 10px;
+}
+.logo:hover .icon {
+	animation-play-state: running;
+}
+@keyframes rotate {
+	100% {transform: rotate(1turn);}
+}
+.logotext {
+	display: inline-block;
+	padding: 0px 15px;
+	font-style: italic;
+	line-height: 25pt;
+}
+.header .links {
+	background: lightgray;
+	display: block;
+	margin-top: 10px;
+	line-height: 25pt;
+	border-bottom: 1px solid green;
+	box-shadow: 0px 2px 1px 0px green;
+}
+.header .links a {
+	padding: 10px;
+	text-decoration: none;
+}
+/* content */
+.post {
+	display: block;
+	margin: 50px;
+	padding-bottom: 25px;
+	border-bottom: 2px solid lightgray;
+	margin-left: auto;
+	margin-right: auto;
+	line-height: 2;
+}
+
+.h1 {
+	display: block;
+	text-decoration: underline;
+	font-weight: bold;
+	margin: 50px 0px 50px 0px;
+	transform: scale(1, 1.5);
+	line-height: 40pt;
+	font-size: 30pt;
+}
+
+.h2 {
+	display: block;
+	font-size: 18pt;
+	font-weight: bold;
+}
+
+.index {
+	font-size: 9pt;
+}
+
+.date, .ert, .ert::before {
+	color: gray;
+	text-weight: bold;
+	font-size: 10.5pt;
+}
+
+.date::after {
+	content: "/";
+	padding: 0px 0px 0px 5px;
+}
+
+.mono, code {
+	font-family: Consolas,Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+}
+
+.index_post {
+	display: block;
+}
+
+/* thumbnails */
+.thumb {
+	border-bottom: 3px dotted #444;
+	font-size: 0;
+}
+.thumb:hover {
+	border-bottom: 3px dotted green;
+}
+.thumb img {
+	width: 100px;
+	height: 100px;
+	padding-bottom: 3px;
+	margin-top: 20px;"
+}
+
+</style>
+<link rel="alternate" href="/feed.xml" type="application/rss+xml">
+<title>
+About & FAQ
+ &#9851;</title>
+</head>
+<body>
+
+<div class="header">
+<a href="/" class="logo">
+	<div class="icon">&#9851;</div>
+	<div class="logotext">
+		Oliver Smith's next day job:<br>
+		Recycle old smartphones with native GNU/Linux!<br>
+	</div>
+</a>
+<div class="links">
+	<a href="/">home</a>
+	<a href="/page/faq/">about / faq</a>
+	<a href="/page/feedback/">feedback</a>
+	<a href="/page/donate/">donate</a>
+	<a href="/feed.xml">rss</a>
+</div>
+</div>
+<div class="post">
+<a class="h1" href="/page/faq/">About & FAQ</a>
+
+<p>
+	I'll be writing more about <a href="https://github.com/postmarketOS/">postmarketOS</a> and related topics, such as <a href="https://alpinelinux.org/">Alpine Linux</a> and maybe <a href="https://halium.org/">Halium</a> on this blog. But also about experiments with <a href="/page/donate/">crowdfunding</a> the whole thing to make it my next day job. Feel free to <a href="/pages/feedback/">write</a> me more questions.
+</p>
+
+<h2>Any plans to collaborate with <a href="https://halium.org/">Halium</a>?</h2>
+<p>
+	Yes, I hope we can share udev rules, unify kernels and maybe work on a few other parts together! But keep in mind, that postmarketOS has a different architecture (mostly due to Alpine Linux, which is required for <code>pmbootstrap</code>), so it can not build on the Halium stack and this will not be a goal in the future. It does not use the glibc, systemd or the Android build system, or run Android next to GNU/Linux.
+</p>
+
+<h2>Why did you wait so long before releasing anything?</h2>
+<p>
+	I needed to make sure, that <code>pmbootstrap</code> is safe to use. It downloads Alpine's <code>apk</code> (<a href="https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management">Alpine Linux package manager</a>, not to be confused with the <a href="https://en.wikipedia.org/wiki/Android_application_package">Android app format</a>) binary from the Internet and executes it with root rights. This means, that <code>apk</code> needs to be verified properly before execution (GPG key signature check with <code>openssl</code>, minimum required version), and the whole verification process needed to have testcases (which it does now). Furthermore I took my time to put up this blog and write <a href="/post/postmarketOS/">the announcement</a>, as well as the rest of the content.
+</p>
+<p>
+	Oh and I did actually release my <a href="https://github.com/ollieparanoid/aports-extra">Alpine cross-compiling efforts</a> about a month earlier.
+</p>
+
+<h2>Why do you keep talking about GNU/Linux all the time, when Alpine uses <a href="https://www.musl-libc.org/">musl</a> and <a href="https://en.wikipedia.org/wiki/BusyBox">BusyBox</a> instead of <a href="https://en.wikipedia.org/wiki/GNU_C_Library">glibc</a> and the <a href="https://en.wikipedia.org/wiki/GNU_Core_Utilities">GNU Core Utilities</a>?</h2>
+
+Alpine has replaced a lot of GNU components, but still uses GCC and the binutils. They have also packaged just about every typical GNU userspace component, except for the glibc so you can just install them if you want to (example: <code>apk add bash</code>). Besides that, I personally like the <a href="https://www.gnu.org/philosophy/philosophy.html">GNU philosophy</a> and calling postmarketOS a GNU/Linux distribution helps to differentiate it better:
+<ul>
+	<li> GNU/Linux (Linux kernel with more or less GNU userspace)
+	<li> Android/Linux (Linux kernel with Android userspace)
+	<li> Linux (just the kernel)
+</ul>
+
+<h2>Which blog software do you use?</h2>
+
+<code>make</code> (<a href="https://github.com/ollieparanoid/ollieparanoid.github.io">source</a>).
+
+</div>
+</body>
+</html>
