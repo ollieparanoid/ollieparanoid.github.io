@@ -1,4 +1,4 @@
-WEBROOT :=
+WEBROOT := https://ollieparanoid.github.io
 PAGES := $(shell find -L page -name '*.html')
 PAGES := $(patsubst %.html,../%/index.html,$(PAGES))
 POSTS := $(shell find -L post -name '*.html')
@@ -89,3 +89,4 @@ clean:
 		2> /dev/null || true
 
 .PHONY: clean all
+

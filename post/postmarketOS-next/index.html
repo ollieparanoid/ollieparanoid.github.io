@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<style type="text/css">
+/* general */
+body {
+	margin: 0px;
+	padding: 10px 50px;
+	font-family: DejaVu Sans, Sans-Serif, Arial;
+}
+a, a:visited, body {
+	color: #444;
+}
+a:hover, a:active {
+	color: green;
+}
+
+.header, .post {
+	max-width: 800px;
+}
+
+/* header */
+.header {
+	display: block;
+	line-height: 20pt;
+	margin-left: auto;
+	margin-right: auto;
+}
+/* header logo: icon + green text on the right */
+.logo, .logo:visited {
+	display: block;
+	color: green;
+}
+.icon {
+	animation: rotate 2s linear infinite;
+	animation-play-state: paused;
+	display: block;
+	font-size: 50pt;
+	float: left;
+	line-height: 50pt;
+	padding: 0px 10px;
+}
+.logo:hover .icon {
+	animation-play-state: running;
+}
+@keyframes rotate {
+	100% {transform: rotate(1turn);}
+}
+.logotext {
+	display: inline-block;
+	padding: 0px 15px;
+	font-style: italic;
+	line-height: 25pt;
+}
+.header .links {
+	background: lightgray;
+	display: block;
+	margin-top: 10px;
+	line-height: 25pt;
+	border-bottom: 1px solid green;
+	box-shadow: 0px 2px 1px 0px green;
+}
+.header .links a {
+	padding: 10px;
+	text-decoration: none;
+}
+/* content */
+.post {
+	display: block;
+	margin: 50px;
+	padding-bottom: 25px;
+	border-bottom: 2px solid lightgray;
+	margin-left: auto;
+	margin-right: auto;
+	line-height: 2;
+}
+
+.h1 {
+	display: block;
+	text-decoration: underline;
+	font-weight: bold;
+	margin: 50px 0px 50px 0px;
+	transform: scale(1, 1.5);
+	line-height: 40pt;
+	font-size: 30pt;
+}
+
+.h2 {
+	display: block;
+	font-size: 18pt;
+	font-weight: bold;
+}
+
+.index {
+	font-size: 9pt;
+}
+
+.date, .ert, .ert::before {
+	color: gray;
+	text-weight: bold;
+	font-size: 10.5pt;
+}
+
+.date::after {
+	content: "/";
+	padding: 0px 0px 0px 5px;
+}
+
+.mono, code {
+	font-family: Consolas,Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+}
+
+.index_post {
+	display: block;
+}
+
+/* thumbnails */
+.thumb {
+	border-bottom: 3px dotted #444;
+	font-size: 0;
+}
+.thumb:hover {
+	border-bottom: 3px dotted green;
+}
+.thumb img {
+	width: 100px;
+	height: 100px;
+	padding-bottom: 3px;
+	margin-top: 20px;"
+}
+
+</style>
+<link rel="alternate" href="https://ollieparanoid.github.io/feed.xml" type="application/rss+xml">
+<title>
+postmarketOS: Overwhelmed by feedback and next steps
+ &#9851;</title>
+</head>
+<body>
+
+<div class="header">
+<a href="https://ollieparanoid.github.io/" class="logo">
+	<div class="icon">&#9851;</div>
+	<div class="logotext">
+		Oliver Smith's next day job:<br>
+		Recycle old smartphones with native GNU/Linux!<br>
+	</div>
+</a>
+<div class="links">
+	<a href="https://ollieparanoid.github.io/">home</a>
+	<a href="https://ollieparanoid.github.io/page/faq/">about / faq</a>
+	<a href="https://ollieparanoid.github.io/page/feedback/">feedback</a>
+	<a href="https://ollieparanoid.github.io/page/donate/">donate</a>
+	<a href="https://ollieparanoid.github.io/feed.xml">rss</a>
+</div>
+</div>
+<div class="post">
+
+<a class="h1" href="https://ollieparanoid.github.io/post/postmarketOS-next/">postmarketOS: Overwhelmed by feedback and next steps</a>
+<span class="date">2017-05-28</span>
+<span class="ert">	2 min</span>
+
+<p>
+	<i>A few words about the community's reception and detailed future plans to get a stable base/make contributing easy.</i>
+</p>
+
+<a class="h2" href="#quick-recap" id="quick-recap">Quick recap</a>
+
+<p>
+	Just about twenty-four hours ago I have posted my initial post about <a href="https://ollieparanoid.github.io/post/postmarketOS-next//post/postmarketOS/">postmarketOS</a> on <a href="https://www.reddit.com/r/linux/comments/6djq1z/postmarketos_aiming_for_a_10_year_lifecycle_for/">/r/linux</a> and <a href="https://news.ycombinator.com/item?id=14427232">Hacker News</a>. It quickly ended up at the front-page of both websites, and as of writing, there are more than 300 comments. The <a href="https://github.com/postmarketOS/pmbootstrap">pmbootstrap</a> repository has 115 stargazers, and two (resolved) bug reports. This means, people are already trying the code out! This definitely went past my expectations so here is a big thank you to everyone who has commented, shared the link, tested code or helped it otherwise!
+</p>
+
+<p>
+	I'm especially happy, that a few people want to port postmarketOS to their device. This is exactly what this project needs now, because <b>with multiple developers it can accelerate!</b>
+</p>
+
+<a class="h2" href="#ci-static" id="ci-static">CI: Static code analysis</a>
+<p>
+	The following week(s) I will focus on helping other developers with said porting process. Since the release, I have added <a href="https://travis-ci.org/postmarketOS/pmbootstrap">continuous integration</a> for <a href="https://github.com/postmarketOS/pmbootstrap/blob/master/test/static_code_analysis.sh">static code analysis</a> with <a href="https://gitlab.com/pycqa/flake8">flake8</a> and <a href="https://www.shellcheck.net/">shellcheck</a> (I've used both tools before publishing the code). Flake8 checks for common python errors (such as unused imports or variables) and for formatting according to the widespread <a href="https://www.python.org/dev/peps/pep-0008/">PEP 8 style guide</a> (no need to read all that, just run <a href="https://github.com/hhatto/autopep8">autopep8</a> after coding and you're good &mdash; <code>static_code_analysis.sh</code> will output the exact command). And shellcheck, well, checks shell scripts (currently the checking script itself only, ideally it will check all scripts in the repo at some point in the future).
+</p>
+
+<a class="h2" href="#ci-testsuite" id="ci-testsuite">CI: Testsuite</a>
+<p>
+	Ideally, the CI would also run all testcases, that the project has. So we could make full use of the safety net, that a testsuite provides, and never accidentally merge code which breaks a testcase.
+</p>
+<p>
+	Code, that does not break all the time is more fun and therefore good for the community, so this is my next personal goal for postmarketOS.
+</p>
+
+<a class="h2" href="#binary-repo" id="binary-repo">Binary package repository</a>
+
+<p>
+	Here comes the catch: There is a testcase, for cross-compiling with the <a href="https://github.com/postmarketOS/pmbootstrap/tree/master/aports/gcc-armhf">gcc-armhf</a> package, which currently needs to be built from source. That takes some time, and while it is no problem on a developer's machine, because it gets only built once (probably before the testsuite even runs during normal usage of pmbootstrap), it is not feasible to do that every time in a CI environment.
+</p>
+<p>
+	So as a dependency of getting the testsuite working with CI, a <b>binary package repository is needed</b> and that is immediate my next step in the project. This will have the nice side-effect, that using pmbootstrap is faster for everyone, because you don't need to compile the packages you didn't change anymore.
+</p>
+<p>
+	The downside is of course, that you need to trust my binary packages, so I'll spend some time to figure out some kind of security strategy (compile on a dedicated machine, maybe get reproducible builds going for those few packages, if it is feasible?).
+</p>
+
+<a class="h2" href="#closing-words" id="closing-words">Closing words</a>
+<p>
+	So that is my plan for now, and I'll adjust it to what happens in the community. Please keep in mind, that I do this project in my free time, so it might take some time until I get it done.
+</p>
+
+<p>
+	Oh and I was amazed when I found out, that  <a href="https://alpinelinux.org">Alpine Linux</a> (which postmarketOS is based on) has CI set up to <a href="https://travis-ci.org/alpinelinux/aports">build all packages, that get changed in a pull request</a> (of course they have their dedicated servers for real package building, but this is a great safety feature)!
+</p>
+
+<p>
+	Happy porting!
+</p>
+
+</div>
+
+</body>
+</html>
