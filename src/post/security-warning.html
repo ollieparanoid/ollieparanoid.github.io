@@ -1,0 +1,102 @@
+<div class="post">
+
+<a class="h1" href="@SELF@">Aiming for a 10 year security nightmare</a>
+<span class="date">2017-06-03</span>
+<span class="ert">@ERT@</span>
+
+<p>
+	<i>Why it is a bad idea to run devices with outdated firmware, and what we can win in the long term by taking that risk during development of postmarketOS.</i>
+</p>
+
+<a class="h2" href="#index" id="index">Index</a>
+
+<ul class="index">
+	<li><a href="#outdated-firmware-threatens-old-smartphones">Outdated firmware threatens old smartphones</a>
+	<li><a href="#we-cant-fix-this">We can't fix this any time soon</a>
+	<li><a href="#attack-model">Depending on your attack model, up-to-date phones with manufacturer support are just as bad.</a>
+	<li><a href="#better-open-source-firmware">We would be better off with open source firmware.</a>
+	<li><a href="#long-term-options">Long term options</a>
+	<li><a href="#fuck-yeah">Fuck yeah!</a>
+	<li><a href="#what-does-this-mean-for-pmOS">I am really hyped now, but what does all this mean for postmarketOS?</a>
+	<li><a href="#thanks">Thanks to...</a>
+</ul>
+
+<a class="h2" href="#outdated-firmware-threatens-old-smartphones" id="outdated-firmware-threatens-old-smartphones">Outdated firmware threatens old smartphones</a>
+<p>
+	This is a follow-up post to the project I've published last week: <a href="@WEBROOT@/post/postmarketOS/">postmarketOS</a> <i>a touch-optimized, pre-configured <a href="https://alpinelinux.org/">Alpine Linux</a> with <a href="https://github.com/postmarketOS/pmbootstrap/tree/master/aports">own packages</a>, that can be installed on smartphones</i>.
+	In that post I have painted an utopic image, of how the world of smartphones could consist of well maintainable open source software with ten year hardware life-cycles, and how we, as a community, could get there some day.
+</p>
+
+<p>
+	Now let me do the opposite and crush your dreams: Basically all phones, where the <b>support from the manufacturer has run out</b>, have <b>serious security holes inside their <a href="https://googleprojectzero.blogspot.nl/2017/04/over-air-exploiting-broadcoms-wi-fi_4.html">Wifi</a> and <a href="https://www.osnews.com/story/27416/The_second_operating_system_hiding_in_every_mobile_phone">cellular modem firmware</a></b>! That can be used to turn your device silently into a surveillance device, because these components have direct access to your device's <a href="https://en.wikipedia.org/wiki/Random-access_memory">RAM</a> (via <a href="https://en.wikipedia.org/wiki/Direct_memory_access">DMA</a>), location (<a href="https://en.wikipedia.org/wiki/Global_Positioning_System">GPS</a>), microphone and camera. <b><a href="https://bugs.chromium.org/p/project-zero/issues/detail?id=1046#c2">Exploits are publicly available</a> for everyone.</b> The older your device is, the more certain you can be, that there is such an exploit available.
+</p>
+
+<a class="h2" href="#we-cant-fix-this" id="we-cant-fix-this">We can't fix this any time soon</a>
+<p>
+	These firmwares are complex closed source operating systems, and there are only few people the open source software community, who know something about them. Even worse, it is only possible to install cryptographically signed firmware files on modern smartphones, so we couldn't replace them, even if we understood them and had replacements!
+</p>
+
+<a class="h2" href="#attack-model" id="attack-model">Depending on your attack model, up-to-date phones with manufacturer support are just as bad.</a>
+<p>
+	I will assume, that you &mdash; the somewhat tech-interested reader of this blog post &mdash; does not want phones to be little <a href="http://www.huffingtonpost.com/2013/09/09/nsa-steve-jobs_n_3895375.html">big brothers</a> in people's pockets, that listen to every word they are saying. At least not <i>your</i> phone.
+</p>
+<p>
+	In that case: Does it really matter that much, <i>who</i> has access to the security holes present in your device's firmware?
+</p>
+	
+<p>
+	Let's say, that you use an up-to-date device with the hardened <a href="https://copperhead.co/android/">CopperheadOS</a>, and install all updates as soon as they become available. This is just about the best thing you can do regarding Android security <i>(really, get a CopperheadOS phone, if you are about to buy a new phone!)</i>. <b>Does this mean, that you are safe</b> from exploits through security holes in the Wifi or cellular modem firmware? <b>No!</b>
+</p>
+
+<p>
+	Thanks to <a href="https://en.wikipedia.org/wiki/Edward_Snowden">Edward Snowden</a> we know, that there are agencies all around the world, with enormous budgets, who spend all day finding security holes in all kinds of software (to complement the <a href="https://redmine.replicant.us/projects/replicant/wiki/SamsungGalaxyBackdoor">intentional backdoors</a> they alread have). <a href="https://www.wired.com/2015/02/nsa-firmware-hacking/">Of course that includes smartphone firmware.</a> So how can you be certain, that not even one of these agencies is able to hack <i>your</i> phone (let alone the phones of your friends and family with possibly less technical knowledge)? And if they are, <b>how can anyone be sure, that their exploits do not get turned into ransomware by a third party and get used against the general public? <a href="https://www.independent.co.uk/news/uk/home-news/nhs-cyber-attack-edward-snowden-accuses-nsa-not-preventing-ransomware-a7733941.html">This is just what happened with WannaCry about three weeks ago!</a></b>
+</p>
+
+<a class="h2" href="#better-open-source-firmware" id="better-open-source-firmware">We would be better off with open source firmware.</a>
+
+<p>
+	I'm not saying here, that open source is the cure to all problems. We sure do have <a href="https://github.com/opsxcq/exploit-CVE-2017-7494" title="SambaCry security hole, could have been the open-source catastrophe counterpart to WannaCry">our share of security bugs</a>. But with open source, we at least get the option to verify the source code. We can fix bugs when <i>we</i> want to, and not when it fits into the schedule of the manufacturer's company. We can write code with modern coding standards, such as static code analysis, having a comprehensive testsuite with measured code coverage and we could implement preventive measures, such as proper <a href="https://en.wikipedia.org/wiki/Privilege_separation">privilege separation</a> or using safer programming languages.
+</p>
+<p>
+	<b>We would at least have the opportunity to make it better. Today we can only blindly trust the firmware vendor.</b>
+</p>
+
+<a class="h2" href="#long-term-options" id="long-term-options">Long term options</a>
+<ul>
+	<li><b><a href="https://www.stallman.org/rms-lifestyle.html">Don't use smartphones at all.</a></b> <i>Good luck convincing your WhatsApp friends.</i>
+	<li> <b>Let politicians make laws, that demand open source</b>. Snowdens leaks date back to 2013, and the situation has not improved at all, so I don't expect that to work out.
+	<li> <b>Let companies handle that.</b> They know exactly, what they are doing by with their closed-source components, that can't be updated without their support. So this definitely won't work.
+	<li> <b>Let's take it into our own hands and hack the hell out of it until we, as a community, understand every last bit of how it works and can really control our own devices, even if takes years to get there.</b>
+</ul>
+
+<a class="h2" href="#fuck-yeah" id="fuck-yeah">Fuck yeah!</a>
+
+<p>
+In my opinion, the first step is to break-free of Android's <a href="@WEBROOT@/post/postmarketOS/#why-is-android-different">unsustainable development model</a> and that is, what postmarketOS is doing. When we have a solid base like that <b>(and yes, that will take a really long time, if we ever pull it off)</b>, then we can free one closed source firmware at a time. It's not like nobody has tried to develop an <a href="https://osmocom.org/projects/baseband">open source baseband</a> or <a href="https://www.reddit.com/r/3dshacks/comments/5kybtc/sighax_an_explanation_that_actually_explains/">cracked signature verification code</a> for firmwares.
+</p>
+
+<p>
+	<b>The hacker community has the skills. The only question is, if we have enough manpower.</b>
+</p>
+
+<a class="h2" href="#what-does-this-mean-for-pmOS" id="what-does-this-mean-for-pmOS">I am really hyped now, but what does all this mean for postmarketOS?</a>
+<p>
+	Here are some tips, that you, as postmarketOS developer, may apply to phones with insecure firmware, whatever that means to you.
+</p>
+<ul>
+	<li> <b>Never store sensitive data on the device.</b>
+	<li> <b>Put the battery out of your device</b> when it is turned off.
+	<li> <b>Do security research</b> and extend your device's <a href="https://github.com/postmarketOS/pmbootstrap/wiki/Devices">wiki page</a> with the issues you can find. Then think of ways to work around them <i>(how about removing the most dangerous parts of a blob, like <a href="https://github.com/corna/me_cleaner">me_cleaner</a> does?).</i>
+	<li> <a href="https://blog.torproject.org/blog/mission-impossible-hardening-android-security-and-privacy#MicrophoneRemoval">Consider <b>removing your device's microphone</b></a>
+	<li> <a href="https://blog.torproject.org/blog/mission-impossible-hardening-android-security-and-privacy#BasebandRemoval">Consider using a tablet instead of a phone and <b>removing baseband</b> completely</a>
+</ul>
+
+<a class="h2" href="#thanks" id="thanks">Thanks to...</a>
+<p>
+	...everyone who has contributed to the project so far (be it in code, kind words, or constructive criticism), there are quite a few of you considering the short time that the project is available. Thanks to Alpine Linux, sorry I forgot to explicitly thank you in the initial blog post &mdash; of course all this would not have been possible without that tiny, fun GNU/Linux distribution! Thanks to /u/strncat for pushing me to write this "security warning" <i>(although I don't think that this is quite what you had in mind &mdash; but it names all the issues, right?)</i> and for that project, which you maintain. Quite a fan of that actually.
+</p>
+<p>
+	I strongly believe that we, as in the open source community, really need to be straight with these problems and must not ignore them.
+</p>
+</div>
+
