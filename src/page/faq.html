@@ -7,7 +7,7 @@
 
 <h2>Any plans to collaborate with <a href="https://halium.org/">Halium</a>?</h2>
 <p>
-	Yes, I hope we can share udev rules, unify kernels and maybe work on a few other parts together! But keep in mind, that postmarketOS has a different architecture (mostly due to Alpine Linux, which is required for <code>pmbootstrap</code>), so it can not build on the Halium stack and this will not be a goal in the future. It does not use the glibc, systemd or the Android build system, or run Android next to GNU/Linux.
+	Yes, I hope we can share udev rules, unify kernels and maybe work on a few other parts together! But keep in mind, that postmarketOS has a different architecture (mostly due to Alpine Linux, which is required for <code>pmbootstrap</code>), so it can not build on the Halium stack and this will not be a goal in the future. It does not use the glibc, systemd or the Android build system, or run Android next to its Linux kernel, Musl libc and busybox userland.
 </p>
 
 <h2>Why did you wait so long before releasing anything?</h2>
@@ -18,12 +18,16 @@
 	Oh and I did actually release my <a href="https://github.com/ollieparanoid/aports-extra">Alpine cross-compiling efforts</a> about a month earlier.
 </p>
 
-<h2>Why do you keep talking about GNU/Linux all the time, when Alpine uses <a href="https://www.musl-libc.org/">musl</a> and <a href="https://en.wikipedia.org/wiki/BusyBox">BusyBox</a> instead of <a href="https://en.wikipedia.org/wiki/GNU_C_Library">glibc</a> and the <a href="https://en.wikipedia.org/wiki/GNU_Core_Utilities">GNU Core Utilities</a>?</h2>
+<h2>Why do you keep talking about Musl/Linux all the time instead of GNU/Linux, why does Alpine use <a href="https://www.musl-libc.org/">musl</a> and <a href="https://en.wikipedia.org/wiki/BusyBox">BusyBox</a> instead of <a href="https://en.wikipedia.org/wiki/GNU_C_Library">glibc</a> and the <a href="https://en.wikipedia.org/wiki/GNU_Core_Utilities">GNU Core Utilities</a>?</h2>
 
-Alpine has replaced a lot of GNU components, but still uses GCC and the binutils. They have also packaged just about every typical GNU userspace component, except for the glibc so you can just install them if you want to (example: <code>apk add bash</code>). Besides that, I personally like the <a href="https://www.gnu.org/philosophy/philosophy.html">GNU philosophy</a> and calling postmarketOS a GNU/Linux distribution helps to differentiate it better:
+GNU/Linux implies that the system is based on the Linux kernel, and then uses GNU software (the GNU LibC, and the GNU coreutils) to put that kernel to some use. An astonishing part of the software in normal GNU/Linux distributions comes from the GNU project, and no "Linux distribution" would be usable without GNU. Except Alpine, and all the other distributions based on alternative libc libraries and userlands.
+Indeed, Alpine has replaced a lot of GNU components (with the exception of GCC and the binutils, which are in the works). But they have also packaged just about every typical GNU userspace component, except for the glibc; so you can just install them if you want to (example: <code>apk add bash</code>). Having a different libc means that software compiled for GNU/Linux will not necessarily run on Alpine. Since there already is a heavy confusion between Linux and GNU/Linux, it appeared important to make that distinction clear: while you can install GNU software from Alpine packages on Alpine, you cannot take any binary linked against the GlibC (steam, skype, etc.) and simply have it work.
+
+Besides that, calling postmarketOS a Musl/Linux distribution helps to differentiate it better:
 <ul>
-	<li> GNU/Linux (Linux kernel with more or less GNU userspace)
-	<li> Android/Linux (Linux kernel with Android userspace)
+	<li> GNU/Linux (Linux kernel with a GNU userspace)
+	<li> Android/Linux (Linux kernel with Android Bionic libc, and Android userspace)
+	<li> Musl/Linux (Linux kernel with the Musl libc, useless without a userspace such as busybox)
 	<li> Linux (just the kernel)
 </ul>
 
