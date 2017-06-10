@@ -144,7 +144,7 @@ postmarketOS: Aiming for a 10&nbsp;year life-cycle for smartphones
 	<div class="icon">&#9851;</div>
 	<div class="logotext">
 		Oliver Smith's next day job:<br>
-		Recycle old smartphones with native GNU/Linux!<br>
+		Recycle old smartphones with a native Linux distribution!<br>
 	</div>
 </a>
 <div class="links">
@@ -175,10 +175,16 @@ postmarketOS: Aiming for a 10&nbsp;year life-cycle for smartphones
 	<i>Introduction post to <a href="https://github.com/postmarketOS/">postmarketOS</a>, a touch-optimized, pre-configured <a href="https://alpinelinux.org/">Alpine Linux</a> with own packages, that can be installed on smartphones. (Not usable for most people yet!)</i>
 </p>
 
+<small>
+<p>
+	<i>Update: Alpine Linux developers do not see their distribution as "GNU/Linux", so I won't be using this term for Alpine or pmOS anymore. One of these developers, ^7heo, <a href="https://github.com/ollieparanoid/ollieparanoid.github.io/pull/1">helped me</a> to reword this article and other pages on this blog accordingly, thank you!</i>
+</p>
+</small>
+
 <a class="h2" href="#index" id="index">Index</a>
 
 <ul class="index">
-	<li><a href="#10-year-old-pcs">GNU/Linux runs fine on ten year old PCs.</a>
+	<li><a href="#10-year-old-pcs">Minimalistic Linux distributions run fine on ten year old PCs.</a>
 	<li><a href="#why-is-android-different">Why are Android/Linux phones different?</a>
 	<li><a href="#we-can-fix-this">We can fix this as a community.</a>
 	<li><a href="#architecture">postmarketOS architecture</a>
@@ -191,11 +197,11 @@ postmarketOS: Aiming for a 10&nbsp;year life-cycle for smartphones
 
 
 <a class="h2" href="#10-year-old-pcs" id="10-year-old-pcs">
-	GNU/Linux runs fine on ten year old PCs.
+	Minimalistic Linux distributions run fine on ten year old PCs.
 </a>
 
 <p>
-	It is 2017. Pick an average PC from 2007 and install a minimal GNU/Linux based operating system. You will be able to do basic computing tasks (eg. surfing the web, reading E-Mails, listening to music, chatting) just like on an <i>expensive</i> modern PC. You will even get security updates, so your old computer is protected, just like as a new one.
+	It is 2017. Pick an average PC from 2007 and install a minimal Linux based operating system. You will be able to do basic computing tasks (eg. surfing the web, reading E-Mails, listening to music, chatting) just like on an <i>expensive</i> modern PC. You will even get security updates, so your old computer is protected, just like as a new one.
 </p>
 
 <a class="h2" href="#why-is-android-different"
@@ -225,7 +231,7 @@ postmarketOS: Aiming for a 10&nbsp;year life-cycle for smartphones
 </a>
 
 <p>
-	Here is the solution: Bend an existing GNU/Linux distribution to run on smartphones. 
+	Here is the solution: Bend an existing Linux distribution to run on smartphones.
 	
 	Apply all necessary changes as small patches and upstream them, where it makes sense.
 </p>
@@ -254,7 +260,7 @@ postmarketOS: Aiming for a 10&nbsp;year life-cycle for smartphones
 	These <code>device-$vendor-$name</code> packages contain a so-called <code>/etc/deviceinfo</code> file, which <a href="https://github.com/postmarketOS/pmbootstrap/blob/master/aports/device-samsung-i9100/deviceinfo">describes</a> <a href="https://github.com/postmarketOS/pmbootstrap/blob/master/aports/device-lg-mako/deviceinfo">what</a> makes the device special: SD card availability, which flash software to use and other information. The file format is not stable yet, and once we have common kernels for multiple devices, I'd like to include the required modules and <code>dtb</code> name.
 </p>
 <p>
-	And just to make it clear, postmarketOS does not fit the Halium model, as it avoids the Android build system entirely and does <i>not</i> run Android next to GNU/Linux. <i>(At least not in the regular install, but it could come at some point in the future as optional compatibility layer for Android applications if someone wants to work on it. Personally, I'd rather have native GNU/Linux applications than Android apps on my phone.)</i>
+	And just to make it clear, postmarketOS does not fit the Halium model, as it avoids the Android build system entirely and does <i>not</i> run any part of the Android userspace next to its more or less typical Linux userspace. <i>(At least not in the regular install, but it could come at some point in the future as optional compatibility layer for Android applications if someone wants to work on it. Personally, I'd rather have native Linux applications (in the case of Alpine: linked against <a href="https://www.musl-libc.org/">musl</a>, dynamically or statically) than Android apps on my phone.)</i>
 </p>
 
 <a class="h2" href="#prototype" id="prototype">
@@ -279,7 +285,7 @@ Features:
 	<li> Weston demos work performantly (<i>without</i> proprietary 3D acceleration!)
 	<li> SSH access via USB
 	<li> Kernels compiled from LineageOS source
-	<li> Clean GNU/Linux installation &mdash; all files originate from packages
+	<li> Clean package manager based installation
 </ul>
 
 <p>
@@ -329,10 +335,10 @@ Features:
 	<i>Technical details incoming! If you're not into that, skip this section.</i>
 </p>
 <p>
-	Alpine Linux is <i>really small</i>. A base installation is only about 6&nbsp;MB in size and takes not more than a few seconds to extract! Thanks to this characteristic, I was able to write a bootstrap program that abstracts everything in <a href="https://en.wikipedia.org/wiki/chroot">chroots</a> and therefore basically runs on top of any GNU/Linux distribution, which has Python&nbsp;3 and the <code>openssl</code> command line program available.
+	Alpine Linux is <i>really small</i>. A base installation is only about 6&nbsp;MB in size and takes not more than a few seconds to extract! Thanks to this characteristic, I was able to write a bootstrap program that abstracts everything in <a href="https://en.wikipedia.org/wiki/chroot">chroots</a> and therefore basically runs on top of any Linux distribution (GNU-based or not), which has Python&nbsp;3 and the <code>openssl</code> command line program available.
 </p>
 <p>
-	Consequently, the host GNU/Linux system does not get touched when installing the required programs (<a href="https://en.wikipedia.org/wiki/Android_software_development#Fastboot"><code>fastboot</code></a> etc.) and your distribution doesn't even need to have them packaged.
+	Consequently, the host system does not get touched when installing the required programs (<a href="https://en.wikipedia.org/wiki/Android_software_development#Fastboot"><code>fastboot</code></a> etc.) and your distribution doesn't even need to have them packaged.
 </p>
 
 Quick feature rundown:
@@ -429,18 +435,18 @@ Fix the lg-mako screen colors and/or make the following peripherals work:
 </p>
 <h3>Phone interface</h3>
 <p>
-	Package a GNU/Linux phone interface. <a href="https://plasma-mobile.org/">Plasma mobile</a> <i>seems</i> to be the most complete one right now (although still not stable). But I'd also be interested in <a href="https://ubports.com/">ubports</a> (fork of the discontinued <a href="https://en.wikipedia.org/wiki/Ubuntu_Touch">Ubuntu Touch</a>) once it matures. Or maybe writing a minimal Android-like interface based on <a href="https://github.com/wayland-project/weston">libweston</a>.
+	Package a Linux-based phone interface. <a href="https://plasma-mobile.org/">Plasma mobile</a> <i>seems</i> to be the most complete one right now (although still not stable). But I'd also be interested in <a href="https://ubports.com/">ubports</a> (fork of the discontinued <a href="https://en.wikipedia.org/wiki/Ubuntu_Touch">Ubuntu Touch</a>) once it matures. Or maybe writing a minimal Android-like interface based on <a href="https://github.com/wayland-project/weston">libweston</a>.
 </p>
 <p>
 	From what I understand, the <a href="https://together.jolla.com/question/20488/which-parts-of-sailfish-are-closed-source-why-and-will-that-change/">SailfishOS interface is closed source</a>, so that will not be an option.
 </p>
 <p>
-	<i>postmarketOS is a GNU/Linux distribution, so there's no problem in having multiple phone interfaces (just like KDE/Gnome/XFCE/...) and let the user choose.</i>
+	<i>postmarketOS is developed in the spirit of regular Linux distributions, so there's no problem in having multiple phone interfaces (just like KDE/Gnome/XFCE/...) and let the user choose.</i>
 </p>
 
 <h3>Security</h3>
 <p>
-	Great care has been taken to make pmbootstrap safe, as it runs on a productive GNU/Linux distribution. This is not the case for postmarketOS in its current proof-of-concept state (weston runs as root, ...) so we must work on that before it can be used in real life. Even better would be <a href="https://en.wikipedia.org/wiki/Privilege_separation">privilege separation</a> throughout the entire OS.
+	Great care has been taken to make pmbootstrap safe, as it will run on productive systems of postmarketOS developers. This is not the case for postmarketOS in its current proof-of-concept state (Weston runs as root, ...) so we must work on that before it can be used in real life. Even better would be <a href="https://en.wikipedia.org/wiki/Privilege_separation">privilege separation</a> throughout the entire OS.
 </p>
 
 <a class="h2" href="#more" id="more">
