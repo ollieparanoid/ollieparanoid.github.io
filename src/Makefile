@@ -25,13 +25,21 @@ all: ../index.html ../feed.xml $(PAGES) $(POSTS)
 	@ cat template/header.html >> $@.tmp
 	@ echo "<div class=\"post\">" >> $@.tmp
 	@ cat template/home.html >> $@.tmp
+	@ # Write each post into an extra file with stripped new lines, then
+	@ # write all posts into one file
 	@ for f in $(POSTS); do \
 		url=$(WEBROOT)/$${f/.html//}; \
-		grep '<span class="date">' $$f >> $@.tmp; \
-		grep '<span class="ert">' $$f >> $@.tmp; \
+		grep '<span class="date">' $$f >> $@.post.tmp; \
+		grep '<span class="ert">' $$f >> $@.post.tmp; \
 		grep '<a class="h1" href=' $$f |\
-			sed 's/"h1"/"index_post"/g' >> $@.tmp; \
+			sed 's/"h1"/"index_post"/g' >> $@.post.tmp; \
+		tr -d '\n' < $@.post.tmp >> $@.posts.tmp; \
+		echo "" >> $@.posts.tmp; \
+		rm $@.post.tmp; \
 	done
+	@ # Sort all posts (by date) and add them to index.html
+	@ cat $@.posts.tmp | sort -r >> $@.tmp
+	@ rm $@.posts.tmp
 	@ echo "</div>" >> $@.tmp
 	@ cat template/footer.html >> $@.tmp
 	@ sed -i 's~@WEBROOT@~$(WEBROOT)~g' $@.tmp
