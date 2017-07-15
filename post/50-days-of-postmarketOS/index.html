@@ -1,0 +1,413 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<style type="text/css">
+/* general */
+body {
+	margin: 0px;
+	padding: 10px 50px;
+	font-family: DejaVu Sans, Sans-Serif, Arial;
+}
+a, a:visited, body {
+	color: #444;
+}
+a:hover, a:active {
+	color: green;
+}
+
+.header, .post {
+	max-width: 800px;
+}
+
+/* header */
+.header {
+	display: block;
+	line-height: 20pt;
+	margin-left: auto;
+	margin-right: auto;
+}
+/* header logo: icon + green text on the right */
+.logo, .logo:visited {
+	display: block;
+	color: green;
+}
+.icon {
+	animation: rotate 2s linear infinite;
+	animation-play-state: paused;
+	display: block;
+	font-size: 50pt;
+	float: left;
+	line-height: 50pt;
+	padding: 0px 10px;
+}
+.logo:hover .icon {
+	animation-play-state: running;
+}
+@keyframes rotate {
+	100% {transform: rotate(1turn);}
+}
+.logotext {
+	display: inline-block;
+	padding: 0px 15px;
+	font-style: italic;
+	line-height: 25pt;
+}
+.header .links {
+	background: lightgray;
+	display: block;
+	margin-top: 10px;
+	line-height: 25pt;
+	border-bottom: 1px solid green;
+	box-shadow: 0px 2px 1px 0px green;
+}
+.header .links a {
+	padding: 10px;
+	text-decoration: none;
+}
+/* content */
+.post {
+	display: block;
+	margin: 50px;
+	padding-bottom: 25px;
+	border-bottom: 2px solid lightgray;
+	margin-left: auto;
+	margin-right: auto;
+	line-height: 2;
+}
+
+.h1 {
+	display: block;
+	text-decoration: underline;
+	font-weight: bold;
+	margin: 50px 0px 50px 0px;
+	transform: scale(1, 1.5);
+	line-height: 40pt;
+	font-size: 30pt;
+}
+
+.h2 {
+	display: block;
+	font-size: 18pt;
+	font-weight: bold;
+}
+
+.index {
+	font-size: 9pt;
+}
+
+.date, .ert, .ert::before {
+	color: gray;
+	text-weight: bold;
+	font-size: 10.5pt;
+}
+
+.date::after {
+	content: "/";
+	padding: 0px 0px 0px 5px;
+}
+
+.mono, code {
+	font-family: Consolas,Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+}
+
+.index_post {
+	display: block;
+}
+
+/* thumbnails */
+.thumb {
+	border-bottom: 3px dotted #444;
+	font-size: 0;
+}
+.thumb:hover {
+	border-bottom: 3px dotted green;
+}
+.thumb img {
+	width: 100px;
+	height: 100px;
+	padding-bottom: 3px;
+	margin-top: 20px;"
+}
+
+/* thumbnails with text on right */
+.thumb-with-text-on-right
+{
+    clear: left;
+    padding: 10px 0px;
+}
+.thumb-with-text-on-right .thumb
+{
+    float: left;
+    margin-right: 20px;
+}
+
+</style>
+<link rel="alternate" href="https://ollieparanoid.github.io/feed.xml" type="application/rss+xml">
+<title>
+50 days of postmarketOS
+ &#9851;</title>
+</head>
+<body>
+
+<div class="header">
+<a href="https://ollieparanoid.github.io/" class="logo">
+	<div class="icon">&#9851;</div>
+	<div class="logotext">
+		Oliver Smith's next day job:<br>
+		Recycle old smartphones with a native Linux distribution!<br>
+	</div>
+</a>
+<div class="links">
+	<a href="https://ollieparanoid.github.io/">home</a>
+	<a href="https://ollieparanoid.github.io/page/faq/">about / faq</a>
+	<a href="https://ollieparanoid.github.io/page/feedback/">feedback</a>
+	<a href="https://ollieparanoid.github.io/page/donate/">donate</a>
+	<a href="https://ollieparanoid.github.io/feed.xml">rss</a>
+</div>
+</div>
+<div class="post">
+
+<a class="h1" href="https://ollieparanoid.github.io/post/50-days-of-postmarketOS/">50 days of postmarketOS</a>
+
+<div style="margin-top: -30px; margin-bottom: 30px; /*that's how you do it, kids!*/">
+	<span class="date">2017-07-15</span>
+	<span class="ert">	6 min</span>
+</div>
+
+<a class="h2" href="#index" id="index">Index</a>
+
+<ul class="index">
+	<li><a href="#endless-forks">We are fed up with Android's endless forks!</a>
+	<li><a href="#devices-working">From 2 to 8 "working" devices</a>
+	<li><a href="#devices-wip">Another 8 WIP devices</a>
+	<li><a href="#wiki">37 wiki articles</a>
+	<li><a href="#git-commits">264 git commits / 74 closed issues</a>
+	<li><a href="#timestamp-based-rebuilds">Timestamp based rebuilds</a>
+	<li><a href="#new-actions">New actions: initfs, flasher export, challenge</a>
+	<li><a href="#more-numbers">More numbers</a>
+	<li><a href="#thanks">That's it for today's post.</a>
+</ul>
+
+<p>
+	<a class="h2"
+		href="#endless-forks"
+		id="endless-forks">
+			We are fed up with Android's endless forks!
+	</a>
+	
+	Fifty days ago I have <a href="../postmarketOS">announced</a> postmarketOS, a touch-optimized, pre-configured <a href="https://alpinelinux.org">Alpine Linux</a>, which can be installed on smartphones. It avoids Android's bad habit of forking software for <i>every single device&nbsp;(!)</i> entirely by going the other way around and <i>unifying</i> as much as possible: We use regular Linux programs, and try to have only one unique package per device, with ideally <a href="https://github.com/postmarketOS/pmbootstrap/issues/91">one kernel for all devices</a>.
+</p>
+<p>
+	While we already have a solid <code><a href="https://github.com/postmarketOS/pmbootstrap">pmbootstrap</a></code> program for installation and development, pmOS itself is in an early development stage. Making calls and other basic phone features do not work yet. Nevertheless, a small development community has emerged and we can show off quite a few improvements.
+</p>
+
+
+<p>
+	<a class="h2"
+		href="#devices-working"
+		id="devices-working">
+		From 2 to 8 "working" devices
+	</a>
+	We have an unusual definition of <i>working</i> as of now (USB networking and graphics output is enough), but even with that in mind I find this progress impressive for a bunch of random people on the Internet, that never worked together on anything. Sorted by the first commit date, we have the following new devices.
+</p>
+
+<div class="thumb-with-text-on-right">
+	<a class="thumb" href="https://imgur.com/a/riFWE">
+		<img src="../../img/2017-07-15/hammerhead-thumb.jpg">
+	</a>
+	
+	<span class="date">2017-05-30</span>
+	dzervas, lawl, Martijn Braam, Pablo Castellano
+	<a class="index_post" href="https://github.com/postmarketOS/pmbootstrap/wiki/lg-hammerhead-%28Google-Nexus-5%29">
+		<b>Google Nexus 5</b> (<code>lg-hammerhead</code>)
+	</a>
+	
+	We do not have scaling yet, as you can see from the small menu.
+</div>
+
+<div class="thumb-with-text-on-right">
+	<a class="thumb" href="https://reddit.com/6f7iky">
+		<img src="../../img/2017-07-15/maguro-thumb.jpg">
+	</a>
+	
+	<span class="date">2017-06-01</span>
+	lawl
+	<a class="index_post" href="https://github.com/postmarketOS/pmbootstrap/wiki/samsung-maguro-%28Google-Galaxy-Nexus-GSM%29">
+		<b>Google Galaxy Nexus</b> (<code>samsung-maguro</code>)
+	</a>
+	
+	Fun fact: This phone actually has both a fastboot compatible bootloader (used here) and a heimdall/odin compatible one.
+</div>
+
+<div class="thumb-with-text-on-right">
+	<a class="thumb" href="https://imgur.com/y1NLmcF">
+		<img src="../../img/2017-07-15/titan-thumb.jpg">
+	</a>
+	<span class="date">2017-06-04</span>
+	Pablo Castellano
+	<a class="index_post" href="https://github.com/postmarketOS/pmbootstrap/wiki/motorola-titan-%28Moto-G-2014%29">
+		<b>Motorola Moto G 2014</b> (<code>motorola-titan</code>)
+	</a>
+	
+	The first non-LG/Samsung device.
+</div>
+
+<div class="thumb-with-text-on-right">
+	<a class="thumb" href="https://reddit.com/6gfeg7">
+		<img src="../../img/2017-07-15/rx51-thumb.jpg">
+	</a>
+	
+	<span class="date">2017-06-08</span>
+	Martijn Braam
+	<a class="index_post" href="https://github.com/postmarketOS/pmbootstrap/wiki/nokia-rx51-%28Nokia-N900%29">
+		<b>Nokia N900</b> (<code>nokia-rx51</code>)
+	</a>
+	The first <b>non-Android</b> device! It comes with a hardware keyboard, so one can type in the full disk encryption password directly. It uses pali's 4.6 <a href="https://github.com/postmarketOS/pmbootstrap/blob/master/aports/linux-nokia-rx51/APKBUILD">kernel</a>, which is relatively close to mainline already.
+</div>
+
+<div class="thumb-with-text-on-right">
+	<a class="thumb" href="https://reddit.com/6jvb2i">
+		<img src="../../img/2017-07-15/d855-thumb.jpg">
+	</a>
+	
+	<span class="date">2017-06-28</span>
+	Nutcake
+	<a class="index_post" href="https://github.com/postmarketOS/pmbootstrap/wiki/LG-G3-Global">
+		<b>LG G3 Global</b> (<code>lg-d855</code>)
+	</a>
+	
+	<i>"Can confirm, it's REALLY hard to hit those tiny buttons on a 1440x2560 display at 96dpi lol"</i> - Nutcake
+</div>
+
+<div class="thumb-with-text-on-right">
+	<a class="thumb" href="https://reddit.com/6j269y">
+		<img src="../../img/2017-07-15/i9070-thumb.jpg">
+	</a>
+	
+	<span class="date">2017-06-29</span>
+	drebrez
+	<a class="index_post" href="https://github.com/postmarketOS/pmbootstrap/wiki/Samsung-i9070-%28Samsung-Galaxy-S-Advance%29">
+		<b>Samsung Galaxy S Advance</b> (<code>samsung-i9070</code>)
+	</a>
+	
+	Drebrez even <b>made the Wi-Fi work!</b> I thought this would be impossible at such an early stage of the project, yet here we are \o/
+	
+	<small><i>Let's celebrate with <a href="https://imgur.com/9c66GAs">that cool gif</a>!</i></small>
+	</i>
+</div>
+
+<p>
+	<a class="h2"
+		href="#devices-wip"
+		id="devices-wip">
+		Another 8 WIP devices
+	</a>
+	
+	Check out the <a href="https://github.com/postmarketOS/pmbootstrap/wiki/Devices">devices list</a> for eight more <i>work in progress</i> ports. Usually we managed to compile the kernel source (this always requires patches, because we use a modern <code>GCC</code>), and most of the time we have even more working.
+</p>
+
+
+<p>
+	<a class="h2" href="#wiki" id="wiki">
+		37 wiki articles
+	</a>
+	
+	All the porting experience was immediately written down as <a href="https://github.com/postmarketOS/pmbootstrap/wiki/Porting-to-a-new-device">porting guide</a>, <a href="https://postmarketos.org/troubleshooting" title="We have a few short URLs now!">troubleshooting</a>, <a href="https://github.com/postmarketOS/pmbootstrap/wiki/Boot-process">boot process</a> and <a href="https://github.com/postmarketOS/pmbootstrap/wiki/How-to-find-device-specific-information">finding device specific information</a> articles, just to name a few. Dive right in with the new <a href="https://postmarketos.org/wiki/">start page</a> and <a href="https://github.com/postmarketOS/pmbootstrap/issues/24">sidebar</a>!
+</p>
+<p>
+	<a class="h2"
+		href="#git-commits"
+		id="git-commits">
+		264 git commits / 74 closed issues
+	</a>
+	You would need to read <a href="https://github.com/postmarketOS/pmbootstrap/commits/master">every single commit</a> to learn about all the little improvements we have made (including really easy ones, such as displaying a link to the troubleshooting page on errors). But here are the most interesting ones (no one likes to read about <a href="https://github.com/postmarketOS/pmbootstrap/issues?q=is%3Aissue+is%3Aclosed+label%3Abug">boring bug fixes</a>, right?). Two more complex features are explained further below.
+</p>
+<ul>
+	<li> <code>aarch64</code> target support (<a href="https://github.com/postmarketOS/pmbootstrap/issues/84">#84</a>)
+	<li> Add ConfigFS based usb network configuration (<a href="https://github.com/postmarketOS/pmbootstrap/pull/148">#148</a>)
+	<li> Easily include custom packages in the installation with <code>pmbootstrap install --add=vim,gcc</code> (<a href="https://github.com/postmarketOS/pmbootstrap/issues/67">#67</a>)
+	<li> Full disk encryption became optional (still enabled by default!) (<a href="https://github.com/postmarketOS/pmbootstrap/pull/104">#104</a>)
+	<li> Python 3.4 support (for Debian Jessie) (<a href="https://github.com/postmarketOS/pmbootstrap/issues/6">#6</a>)
+	<li> Sane default IP and subnet (<a href="https://github.com/postmarketOS/pmbootstrap/issues/70">#70</a>)
+	<li> Simplify heimdall flashing, make it work with i9070 (<a href="https://github.com/postmarketOS/pmbootstrap/pull/144">#144</a>)
+	<li> Upstreamed to Alpine: Telnet daemon enabled in busybox (<a href="https://github.com/alpinelinux/aports/pull/1092">aports#1092</a>, <a href="https://github.com/postmarketOS/pmbootstrap/commit/1e64a3b511f19d86ba68e4a6a05548cb36757603">1e64a3b</a>)
+	<li> Workaround for the red screen bug in Weston packaged <a href="https://github.com/postmarketOS/pmbootstrap/pull/93">#93</a> (WIP upstream fix: <a href="https://github.com/postmarketOS/pmbootstrap/issues/141">#141</a>)
+</ul>
+
+
+<p>
+	<a class="h2" href="#timestamp-based-rebuilds"
+		id="timestamp-based-rebuilds">
+		Timestamp based rebuilds
+	</a>
+	<a href="https://github.com/alpinelinux/abuild/"><code>abuild</code></a> is the package building program from Alpine Linux, that <code>pmbootstrap</code> wraps around. Just like in most Linux distributions it considers packages up to date, when the package version is equal with the version of the package recipe. This has the side-effect, that package developers must pass <code>--force</code> to rebuild a package if they changed anything, but do not want to increase the version yet.
+</p>
+<p>
+	I have accepted this and didn't even think about it anymore, but then I was confronted with a different view (<a href="https://github.com/postmarketOS/pmbootstrap/issues/69#issuecomment-307321715">especially by mmaret</a>): He expected it to work like the classic <a href="https://en.wikipedia.org/wiki/Make_(software)"><code>make</code></a> build automation program, which means that <b>after modifying one file anywhere in the source tree, it automatically detects which packages are out of date and rebuilds them</b> (and updates them in the relevant chroots) as soon as you execute an action, that depends on that file. Regardless of a version number change.
+</p>
+<p>
+	As I still believe in making <code>pmbootstrap</code> as user friendly as possible <i>(to get more developers, to get more postmarketOS development done in the same time!)</i>, I have implemented this principle for all actions now. It is <b>on by default, but can be turned off</b> at the end of <code>pmbootstrap init</code>.
+</p>
+
+<p>
+	<a class="h2"
+		href="#new-actions"
+		id="new-actions">
+		New actions: <code>initfs</code>, <code>flasher export</code>, <code>challenge</code>
+	</a>
+	<code>initfs</code> makes development of the <a href="https://en.wikipedia.org/wiki/Initramfs">initramfs</a> easier. It allows to build it without running the "lengthy" <code>install</code> action, which would build a full installation image instead. Besides that, this new action can list, add and remove initramfs hooks (e.g. <a href="https://github.com/postmarketOS/pmbootstrap/tree/master/aports/postmarketos-mkinitfs-hook-usb-shell">usb shell</a>) and extract/list the initramfs contents (just like <code>lsinitramfs</code> in Debian).
+</p>
+<p>
+	<code>flasher export</code> generates symbolic links to all files, which are generated in the <code>install</code> step (because they aren't that easy to find inside the chroots): The system image file, kernel, initramfs, boot.img file (if the device is fastboot compatible) and others.
+</p>
+<p>
+	<code>challenge</code> is used to verify reproducible builds for <a href="https://github.com/postmarketOS/pmbootstrap/issues/64">#64</a>, more about that in the next post.
+</p>
+
+<p>
+	<a class="h2"
+		href="#more-numbers"
+		id="more-numbers">
+		More numbers
+	</a>
+	<ul>
+		<li> 356 <a href="https://github.com/postmarketOS/pmbootstrap/stargazers">stargazers</a>
+		<li> 252 <a href="https://reddit.com/r/postmarketOS">/r/postmarketOS</a> readers
+		<li> 40-60 people <a href="https://github.com/postmarketOS/pmbootstrap/wiki/Matrix-and-IRC">in the channel</a>
+		<li> 38 pmOS related mails written (e.g. to <a href="https://reddit.com/6ln7vi">cascardo</a>)
+		<li> 36 <a href="https://github.com/postmarketOS/pmbootstrap/watchers">watchers</a>
+		<li> 31 <a href="https://github.com/postmarketOS/pmbootstrap/network">forks</a>
+		<li> 4 <a href="https://github.com/orgs/postmarketOS/people">core team members</a>: drebrez, Martijn Braam, me, Pablo Castellano
+		<li> 3 times I broke <code>master</code> by not testing enough &gt;_&lt;
+		<li> 2&euro; in <a href="../../page/donate/">weekly donations</a>
+		<li> 1 <a href="https://github.com/postmarketOS/pmbootstrap/commit/fb1e8ec73b0946cfd90a0de125e8453aa30c80f6">security update</a>
+	</ul>
+</p>
+
+<p>
+	<a class="h2"
+		href="#thanks"
+		id="thanks">
+		That's it for today's post.
+	</a>
+	I would like to thank everyone in the <i>alternative open source phone operating system scene</i>, especially everyone working on postmarketOS. It is incredibly motivating to be part of such a community, and to see how everyone is helping everyone, how we all bring this further one tiny step at a time! If I had done all the ports, pull requests, wiki edits from the pmOS community by myself, that would probably have taken a year or so, I'm impressed every time I think about it.
+</p>
+<p>
+	Collaboration across projects is also working, the best example of that would be Bhushan Shah who works on (KDE) <a href="https://plasma-mobile.org/">Plasma Mobile</a>, <a href="https://halium.org/">Halium</a> <i>and</i> hangs out in the postmarketOS chat talking about the newest Nexus 5 kernel mainlining work he just did every now and then (<i>and this is just the OSS work I know of</i>).
+</p>
+<p>
+	<small>
+	Off-topic shout out to Andrew Mc Swain, who talked to me about a completely unexpected topic regarding pmOS: <i>Marketing.</i> Honestly I thought that this was a euphemism for ripping people off and has no place in the open/free software world. But I stand corrected &mdash; as he puts it: "Marketing isn't tricking people into buying sugar water". The following has always made sense to me: Listening to what people need and reaching out to few people who might very likely benefit from knowing this project (without anyone shoving advertisements in their faces, making false promises, or doing something else immoral). Apparently this could be seen as marketing.
+	</small>
+</p>
+
+<p>
+	I have already learned so much from everyone involved and I'm incredibly excited to see where this project is heading :>
+</p>
+
+<!-- TODO: comments -->
+</div>
+</body>
+</html>
