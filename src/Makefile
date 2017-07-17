@@ -29,11 +29,11 @@ all: ../index.html ../feed.xml $(PAGES) $(POSTS)
 	@ # write all posts into one file
 	@ for f in $(POSTS); do \
 		url=$(WEBROOT)/$${f/.html//}; \
-		grep '<span class="date">' $$f >> $@.post.tmp; \
-		grep '<span class="ert">' $$f >> $@.post.tmp; \
-		grep '<a class="h1" href=' $$f |\
+		grep -m1 '<span class="date">' $$f >> $@.post.tmp; \
+		grep -m1 '<span class="ert">' $$f >> $@.post.tmp; \
+		grep -m1 '<a class="h1" href=' $$f |\
 			sed 's/"h1"/"index_post"/g' >> $@.post.tmp; \
-		tr -d '\n' < $@.post.tmp >> $@.posts.tmp; \
+		tr -d '\n\t' < $@.post.tmp >> $@.posts.tmp; \
 		echo "" >> $@.posts.tmp; \
 		rm $@.post.tmp; \
 	done
