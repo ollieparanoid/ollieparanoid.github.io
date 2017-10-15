@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<style type="text/css">
+/* general */
+body {
+	margin: 0px;
+	padding: 10px 50px;
+	font-family: DejaVu Sans, Sans-Serif, Arial;
+	background: white;
+}
+a, a:visited, body {
+	color: #444;
+}
+a:hover, a:active {
+	color: green;
+}
+
+.header, .post {
+	max-width: 800px;
+}
+
+/* header */
+.header {
+	display: block;
+	line-height: 20pt;
+	margin-left: auto;
+	margin-right: auto;
+}
+/* header logo: icon + green text on the right */
+.logo, .logo:visited {
+	display: block;
+	color: green;
+}
+.icon {
+	animation: rotate 2s linear infinite;
+	animation-play-state: paused;
+	display: block;
+	font-size: 50pt;
+	float: left;
+	line-height: 50pt;
+	padding: 0px 10px;
+}
+.logo:hover .icon {
+	animation-play-state: running;
+}
+@keyframes rotate {
+	100% {transform: rotate(1turn);}
+}
+.logotext {
+	display: inline-block;
+	padding: 0px 15px;
+	font-style: italic;
+	line-height: 25pt;
+}
+.header .links {
+	background: lightgray;
+	display: block;
+	margin-top: 10px;
+	line-height: 25pt;
+	border-bottom: 1px solid green;
+	box-shadow: 0px 2px 1px 0px green;
+}
+.header .links a {
+	padding: 10px;
+	text-decoration: none;
+}
+/* content */
+.post {
+	display: block;
+	margin: 50px;
+	padding-bottom: 25px;
+	border-bottom: 2px solid lightgray;
+	margin-left: auto;
+	margin-right: auto;
+	line-height: 2;
+}
+
+.h1 {
+	display: block;
+	text-decoration: underline;
+	font-weight: bold;
+	margin: 50px 0px 50px 0px;
+	transform: scale(1, 1.5);
+	line-height: 40pt;
+	font-size: 30pt;
+}
+
+.h2 {
+	display: block;
+	font-size: 18pt;
+	font-weight: bold;
+}
+
+.index {
+	font-size: 9pt;
+}
+
+.date, .ert, .ert::before {
+	color: gray;
+	text-weight: bold;
+	font-size: 10.5pt;
+}
+
+.date::after {
+	content: "/";
+	padding: 0px 0px 0px 5px;
+}
+
+.mono, code {
+	font-family: Consolas,Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+}
+
+.index_post {
+	display: block;
+}
+
+/* thumbnails */
+.thumb {
+	border-bottom: 3px dotted #444;
+	font-size: 0;
+}
+.thumb:hover {
+	border-bottom: 3px dotted green;
+}
+.thumb img {
+	width: 100px;
+	height: 100px;
+	padding-bottom: 3px;
+	margin-top: 20px;"
+}
+
+/* thumbnails with text on right */
+.thumb-with-text-on-right
+{
+    clear: left;
+    padding: 10px 0px;
+}
+.thumb-with-text-on-right .thumb
+{
+    float: left;
+    margin-right: 20px;
+}
+
+</style>
+<link rel="alternate" href="https://ollieparanoid.github.io/feed.xml" type="application/rss+xml">
+<title>
+Short update
+ &#9851;</title>
+</head>
+<body>
+
+<div class="header">
+<a href="https://ollieparanoid.github.io/" class="logo">
+	<div class="icon">&#9851;</div>
+	<div class="logotext">
+		Oliver Smith's next day job:<br>
+		Recycle old smartphones with a native Linux distribution!<br>
+	</div>
+</a>
+<div class="links">
+	<a href="https://ollieparanoid.github.io/">home</a>
+	<a href="https://ollieparanoid.github.io/page/faq/">about / faq</a>
+	<a href="https://ollieparanoid.github.io/page/feedback/">feedback</a>
+	<a href="https://ollieparanoid.github.io/page/donate/">donate</a>
+	<a href="https://ollieparanoid.github.io/feed.xml">rss</a>
+</div>
+</div>
+<div class="post">
+
+<a class="h1" href="https://ollieparanoid.github.io/post/short-update/">Short update</a>
+<span class="date">2017-10-15</span>
+<span class="ert">	2 min</span>
+
+
+<p>
+    That's funny, I just fired up my editor, copied the last post on this blog and changed the title and date to prepare this new one. Turns out, it is exactly three months later. About time to put up new content here! Also looking at the index page now, the blog titles get consistently shorter, as if it was on purpose.
+</p>
+
+<p>
+    In case you missed it, all the postmarketOS content is now on the all-new <a href="https://postmarketos.org/">postmarketOS.org</a> homepage, including a new <i>100 days of postmarketOS</i> blog post and also one to support the Librem phone (which got funded, yay!). All of that were written as pull requests to the <a href="https://github.com/postmarketOS/postmarketos.org">website repository</a>, together with the rest of the community. This fits to how the project has developed from a single man show to a whole lot of contributors doing awesome teamwork!
+</p>
+<p>
+    I've briefly mentioned the reproducible builds binary packages repository I have been working on in the <i>50 days</i> post. In order to bring postmarketOS more directly forward, I have shifted priorities and will not continue this for now. <a href="https://github.com/postmarketOS/pmbootstrap/issues/64#issuecomment-334252443">#64</a> has a detailed explanation (TL;DR: Takes up too much work, no real security benefit, too many unsolved problems, upstreaming even more to Alpine is a better solution, which is also more in line with the project's goals).
+</p>
+<p>
+    In other news, I have been pointed at <a href="https://colony.io/">colony.io</a>, which I think is worth sharing here. From reading a bit on their homepage, it presents itself like a framework for the perfect worker-owned-company, where everything gets regulated through smart contracts and crypto currencies. Looks like it is not ready for real usage yet. Now I have a hard time trusting that smart contracts stuff because I have not done much research on it and I'm not the type of person who simply buys into hyped new technology (such as Android in case you didn't notice :p). But assuming that can be done securely and everything works as described there, that might become a nice alternative/extension to the usual crowdfunding scenario to fund FLOSS projects.
+</p>
+<p>
+    There, finally I have written something crowdfunding related on this blog, even if it is a bit far fetched. Unlike initially assumed, I will probably not write much about crowdfunding any time soon and concentrate on improving postmarketOS instead. There's not so much I am doing in that funding area anyway. The only real news are, that we have that <a href="https://wiki.postmarketos.org/wiki/Donate">donate wiki page</a> now, where every contributor can put a link like I did. I am currently getting 10 euros per week, which is a nice start (thanks to all the donors)!
+</p>
+<p>
+    Let me finish this post with saying that working with everyone else in the community (from postmarketOS, Alpine, Halium, ...) has been a blast. Be it in contributions, helping out each other, funny comments or in <a href="https://github.com/postmarketOS/pmbootstrap/pull/404#issuecomment-323842255">kind words</a>. I can't imagine how this could have turned out any better in such a short time. This is truly amazing. Thanks, everyone!
+</p>
+</div>
+</body>
+</html>
